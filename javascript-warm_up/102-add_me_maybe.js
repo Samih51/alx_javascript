@@ -1,3 +1,3 @@
-exports.add=function(x, afunction){
+exports.addMeMaybe=function(x, afunction){
     afunction(x++)
 }
