@@ -6,6 +6,8 @@ module.exports =class Square extends require('./5-square.js'){
     }
 
     charPrint(c){
+        if (c == undefined){super.print()}
+        else{
         for(let i=0;i<this.height;i++){
             for(let i=0;i<this.width;i++){
                 process.stdout.write(c);
@@ -13,7 +15,5 @@ module.exports =class Square extends require('./5-square.js'){
            console.log(); 
         }
     }
-    charPrint(){
-        super.print()
     }
 }
