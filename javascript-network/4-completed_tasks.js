@@ -20,7 +20,7 @@ req.get(url, (err, res, body) => {
 
             }
             if (count !=0)
-                completed[i]=count;
+                completed[x]=count;
         }
         console.log(completed);
     }
