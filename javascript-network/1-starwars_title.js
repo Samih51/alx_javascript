@@ -1,9 +1,10 @@
 #!/usr/bin/node
 
 const req = require('request');
-const url = 'https://swapi-api.alx-tools.com/api/films/'+process.argv[2];
+const id = process.argv[2];
+const url = 'https://swapi-api.alx-tools.com/api/films/'+id;
 
-
-req.get(url,(err, res, body) => {
-    console.log(JSON.parse(body).title);
-  });
+req.get(url,{ encoding:'utf-8' }).on('data',function(data){
+    const response= JSON.parse(data);
+    console.log(response.title);
+});
