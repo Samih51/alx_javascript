@@ -3,7 +3,6 @@
 const req = require('request');
 const url = 'https://swapi-api.alx-tools.com/api/films/'+process.argv[2];
 
-req.get(url,{ encoding:'utf-8' }).on('data',function(data){
-    const response= JSON.parse(data);
-    console.log(response.title);
-});
+req.get(url, (body) => {
+   console.log(JSON.parse(body).title);
+  });
