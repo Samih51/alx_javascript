@@ -12,8 +12,9 @@ req.get(url, (err, res, body) => {
 
         for(let i=0;i<body.length;i++){
             let count = 0;
+            
             for(let j=0;j<body.length;j++){
-                if (body[j]['userId']==i && body[j]['completed'] == 'true')
+                if (body[j].userId == i && body[j].completed == 'true')
                     count++;
 
             }
