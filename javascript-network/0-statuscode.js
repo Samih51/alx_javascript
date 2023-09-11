@@ -1,7 +1,6 @@
 #!/usr/bin/node
 
-const { isUtf8 } = require('buffer');
-const { log } = require('console');
+
 const req = require('request');
 const url = process.argv[2];
 
