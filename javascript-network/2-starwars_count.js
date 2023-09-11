@@ -17,8 +17,8 @@ req.get(url, (err, res, body) => {
                 if (character[j]==='https://swapi-api.alx-tools.com/api/people/18/')
                     count++;
             }
-    }
 
+            console.log(count);
+    }
     }
   });
-  console.log(count);
