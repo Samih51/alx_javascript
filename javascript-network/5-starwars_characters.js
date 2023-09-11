@@ -8,10 +8,10 @@ req.get(url, (err, res, body) => {
     console.log(err);
     else{
         response =JSON.parse(body);
-        let cast = response.charachters;
-        for(let i = 0; i<cast.lenth; i++){
+        let cast = response.characters;
+        for(let i = 0; i<cast.length; i++){
 
-            req.get(cast[i], (error, res, bod) => {
+            req.get(cast[i], (error, ress, bod) => {
                 if (error) 
                 console.log(error);
                 else{
