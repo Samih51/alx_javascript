@@ -8,16 +8,17 @@ req.get(url, (err, res, body) => {
     if (err) 
     console.log(err);
     else{
-        response =JSON.parse(body);
+      //  response =JSON.parse(body);
 
-        for(let i=0;i<response.length;i++){
+        for(let i=0;i<body.length;i++){
             let count = 0;
-            for(let j=0;j<response.length;j++){
-                if (response[j]['user']==i && response[j]['completed'] == 'true')
+            for(let j=0;j<body.length;j++){
+                if (body[j]['userId']==i && body[j]['completed'] == 'true')
                     count++;
 
             }
-            completed[i]=count;
+            if (count !=0)
+                completed[i]=count;
         }
         console.log(completed);
     }
