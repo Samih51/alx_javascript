@@ -1,7 +1,5 @@
 #!/usr/bin/node
 
-const { isUtf8 } = require('buffer');
-const { log } = require('console');
 const req = require('request');
 const url = `https://swapi-api.alx-tools.com/api/films/${id}`
 const id =process.argv[2];
