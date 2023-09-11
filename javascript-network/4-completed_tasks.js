@@ -12,9 +12,10 @@ req.get(url, (err, res, body) => {
 
         for(let i=0;i<response.length;i++){
             let count = 0;
+            let x =response[i].userId;
             
             for(let j=0;j<response.length;j++){
-                if (response[j].userId == i && response[j].completed == true)
+                if (response[j].userId == x && response[j].completed == true)
                     count++;
 
             }
