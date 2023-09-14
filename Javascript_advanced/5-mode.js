@@ -13,9 +13,25 @@ function changeMode(size, weight, transform, background, color) {
     const darkMode = changeMode(12, 'bold', 'capitalize', 'black', 'white');
     const screamMode = changeMode(12, 'normal', 'lowercase', 'white', 'black');
 
-    document.getElementById('spookyButton').addEventListener('click', spooky);
-    document.getElementById('darkModeButton').addEventListener('click', darkMode);
-    document.getElementById('screamModeButton').addEventListener('click', screamMode);
+    const paragraph = document.createElement('p');
+    paragraph.innerText = 'Welcome Holberton';
+    document.body.appendChild(paragraph)
+
+    const spookyButton = document.createElement('button');
+    spookyButton.textContent('Spooky');
+    spookyButton.addEventListener('click', spooky);
+    document.body.appendChild(spookyButton);
+
+    const darkModeButton = document.createElement('button');
+    darkModeButton.textContent('Dark');
+    darkModeButton.addEventListener('click', darkMode);
+    document.body.appendChild(darkModeButton);
+
+    const screamButton = document.createElement('button');
+    screamButton.textContent('Scream Mode');
+    dscreamButton.addEventListener('click', screamMode);
+    document.body.appendChild(screamButton);
+
   }
 
   main();
