@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .form{
+            display: flex;
+            flex-direction: row;
+        }
+       
+    </style>
 </head>
 <body>
-    
+    <h1>Login to the website</h1>
+    <div class="form">
+        <textarea id="firstName" cols="10" rows="1" placeholder="Firstname"></textarea>
+        <textarea id="email" cols="10" rows="1" placeholder="Email"></textarea>
+        <button id="log-in" onclick="setCookies()">Log me in</button>
+    </div>
+    <div id="cookie">
+    <h1>Cookies</h1>
+    <button id="cookies" onclick="showCookies()">Show the cookies</button>
+    </div>
+    <script>
+        function setCookies() { 
+            const firstname = document.getElementById("firstName").value;
+            const email = document.getElementById("email").value;
+
+            document.name = firstname;
+            document.email =  email;
+        }
+
+function showCookies() {
+    const p = document.createElement("p");
+    p.innerHTML = "Cookies: " + document.name + " " + document.email ;
+
+    document.body.appendChild(p);
+}
+    </script>
 </body>
 </html>
