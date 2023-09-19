@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .form{
+        .form {
             display: flex;
             flex-direction: row;
         }
@@ -13,13 +13,13 @@
 </head>
 <body>
     <div id="form">
-    <h2>Login to the website</h2>
+        <h2>Login to the website</h2>
         <textarea id="firstName" cols="10" rows="1" placeholder="Firstname"></textarea>
         <textarea id="email" cols="10" rows="1" placeholder="Email"></textarea>
         <button id="log-in" onclick="setCookies()">Log me in</button>
     </div>
     <script>
-        function setCookies() { 
+        function setCookies() {
             const firstname = document.getElementById("firstName").value;
             const email = document.getElementById("email").value;
             const now = new Date(); // Get the current date and time in UTC
@@ -30,48 +30,66 @@
             const expires = now.toUTCString(); // Corrected variable name
             document.cookie = "firstname=" + firstname + "; expires=" + expires; // Set the cookie
             document.cookie = "email=" + email + "; expires=" + expires; // Set the cookie
-
-            showWelcomeMessageOrForm()
+            hideForm();
+            showWelcomeMessageOrForm();
         }
-        function hideForm(){
-            document.getElementById("form").hidden=true;
+
+
+        function hideForm() {
+            document.getElementById("form").hidden = true;
+        }
+
+        function deleteCookiesAndShowForm() {
+            document.cookie = "firstname=; email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             
+            showForm();
         }
-        function deleteCookiesAndShowForm(){
-            deleteCookie("firstname");
-            deleteCookie("email");
-            showForm()
-        }
-        function showForm(){
 
+        function showForm() {
             const message = document.getElementById("message");
-                if (message) 
+            if (message)
                 message.remove();
-            document.getElementById("form").hidden=false;
+            document.getElementById("form").hidden = false;
         }
-        function showWelcomeMessageOrForm(){
 
+        function showWelcomeMessageOrForm() {
             if (getCookie("firstname") && getCookie("email")) {
-                    const header = document.createElement("h1");
-                    const link = document.createElement("a");
+                const header = document.createElement("h1");
+                const link = document.createElement("a");
 
-                    header.textContent = "Welcome " + getCookie("firstname");
-                    header.setAttribute("id", "message");
+                header.textContent = "Welcome " + getCookie("firstname");
+                header.setAttribute("id", "message");
 
-                    link.textContent = "(logout)";
-                    link.style.fontWeight = "normal";
-                    link.style.fontStyle = "italic";
-                    link.style.marginLeft = "10px";
-                    link.addEventListener("click", deleteCookiesAndShowForm);
+                link.textContent = "(logout)";
+                link.style.fontWeight = "normal";
+                link.style.fontStyle = "italic";
+                link.style.marginLeft = "10px";
+                link.addEventListener("click", deleteCookiesAndShowForm);
 
-                    header.append(link);
-                    document.body.append(header);
-                } else {
-                    showForm();
-                }
-                
+                header.append(link);
+                document.body.append(header); // Append the header to the body
+            } else {
+                showForm();
+            }
         }
+
+        // Function to get a cookie by name
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         
+        }
     </script>
 </body>
 </html>
