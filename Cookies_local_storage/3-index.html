@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <div id="form">
+    <h2>Login to the website</h2>
+        <textarea id="firstName" cols="10" rows="1" placeholder="Firstname"></textarea>
+        <textarea id="email" cols="10" rows="1" placeholder="Email"></textarea>
+        <button id="log-in" onclick="setCookies()">Log me in</button>
+    </div>
+    <script>
+        function setCookies() { 
+            const firstname = document.getElementById("firstName").value;
+            const email = document.getElementById("email").value;
+            const now = new Date(); // Get the current date and time in UTC
+
+            // Add 10 days to the current date
+            now.setUTCDate(now.getUTCDate() + 10);
+
+            const expires = now.toUTCString(); // Corrected variable name
+            document.cookie = "firstname=" + firstname + "; expires=" + expires; // Set the cookie
+            document.cookie = "email=" + email + "; expires=" + expires; // Set the cookie
+
+            showWelcomeMessageOrForm()
+        }
+        function hideForm(){
+            document.getElementById("form").hidden=true;
+            
+        }
+        function deleteCookiesAndShowForm(){
+            deleteCookie("firstname");
+            deleteCookie("email");
+            showForm()
+        }
+        function showForm(){
+
+            const message = document.getElementById("message");
+                if (message) 
+                message.remove();
+            document.getElementById("form").hidden=false;
+        }
+        function showWelcomeMessageOrForm(){
+
+            if (getCookie("firstname") && getCookie("email")) {
+                    const header = document.createElement("h1");
+                    const link = document.createElement("a");
+
+                    header.textContent = "Welcome " + getCookie("firstname");
+                    header.setAttribute("id", "message");
+
+                    link.textContent = "(logout)";
+                    link.style.fontWeight = "normal";
+                    link.style.fontStyle = "italic";
+                    link.style.marginLeft = "10px";
+                    link.addEventListener("click", deleteCookiesAndShowForm);
+
+                    header.append(link);
+                    document.body.append(text);
+                } else {
+                    showForm();
+                }
+                
+        }
+        
+    </script>
+</body>
+</html>
