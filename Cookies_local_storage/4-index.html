@@ -10,7 +10,7 @@
             flex-direction: row;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
 </head>
 <body>
@@ -19,7 +19,7 @@
         <!-- Correct the ID to "firstName" with a capital "F" -->
         <textarea id="firstName" cols="10" rows="1" placeholder="Firstname"></textarea>
         <textarea id="email" cols="10" rows="1" placeholder="Email"></textarea>
-        <button id="log-in" onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+        <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
     </div>
 
     <script>
@@ -30,7 +30,7 @@
 
             Cookies.set("firstname", firstname, { expires: 10 });
             Cookies.set("email", email, { expires: 10 });
-
+            hideForm();
             showWelcomeMessageOrForm();
         }
 
