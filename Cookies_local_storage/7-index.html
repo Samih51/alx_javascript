@@ -30,7 +30,7 @@
         function addItemToCart(item){
             var cart = getCartFromStorage();
 
-            if (cart.hasOwnProperty(item)) {
+            if (cart[item] >= 1) {
                 cart[item] += 1;
             }
             else{
@@ -40,7 +40,7 @@
             displayCart();
         }
         function removeItemfromCart(item){
-            let cart = getCartFromStorage();
+            var cart = getCartFromStorage();
             delete cart[item];
             sessionStorage.setItem("cart", JSON.stringify(cart));
             displayCart();
@@ -56,14 +56,11 @@
             h2.textContent = "Available products:";
             document.body.append(h2);
            
-            for(let i=0; i< availableItems.length;i++){
-                const li = document.createElement("li");
-                li.textContent = availableItems[i];
-                console.log(availableItems[i]);
-                li.addEventListener("click", () => {
-                    addItemToCart(availableItems[i]);
-                });
-                totalList.append(li);
+            for (let item of availableItems) {
+                    const li = document.createElement("li");
+                    li.textContent = item;
+                    li.addEventListener("click", () => addItemToCart(item));
+                    totalList.append(li);
                 }
 
             document.body.append(totalList);
@@ -91,28 +88,26 @@
 
             updateCart();
         }
-        function updateCart(){
-            const cart = getCartFromStorage();
-            const ul = document.createElement("ul");
+        function updateCart() {
+                const cart = getCartFromStorage();
+                const ul = document.createElement("ul");
+                if (Object.keys(cart).length == 0) {
+                    const li = document.createElement("li");
+                    li.textContent = "Your cart is empty";
+                    ul.append(li);
+                } else {
+                    const clear = document.createElement("li");
+                    clear.textContent = "Clear my cart";
+                    clear.addEventListener("click", clearCart);
+                    ul.append(clear);
 
-            if (Object.keys(cart).length != 0) {
-                const clear = document.createElement("li");
-                clear.textContent = "Your cart is empty";
-                clear.addEventListener("click", clearCart);
-                ul.append(clear)
-            
-            }
-            else{
-                const li = document.createElement("li");
-                li.textContent = "Your cart is empty";
-                ul.append(li);
-                for (let item in cart) {
+                    for (let item in cart) {
                         if (cart[item] >= 1) {
                             const li = document.createElement("li");
-                            li.textContent = item + " x " + cart[item] + " ";
-                             
+                            const str = item + " x " + cart[item] + " ";
+                            li.textContent = str;
 
-                            const remove = document.createElement("p");
+                            const remove = document.createElement("span");
                             remove.textContent = "(remove)";
                             remove.addEventListener("click", () => removeItemfromCart(item));
 
@@ -123,8 +118,7 @@
                 }
 
                 document.getElementById("cart").append(ul);
-
-        }
+            }
     </script>
 </body>
 </html>
