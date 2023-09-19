@@ -27,7 +27,7 @@
                     li.textContent = availableItems[i];
                     console.log(availableItems[i]);
                     li.addEventListener("click", () => {
-                        addItemToCart(item);
+                        addItemToCart(availableItems[i]);
                     });
                     totalList.append(li);
                 }
