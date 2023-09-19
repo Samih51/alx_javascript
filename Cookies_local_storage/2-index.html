@@ -9,7 +9,6 @@
             display: flex;
             flex-direction: row;
         }
-       
     </style>
 </head>
 <body>
@@ -20,8 +19,8 @@
         <button id="log-in" onclick="setCookies()">Log me in</button>
     </div>
     <div id="cookie">
-    <h1>Cookies</h1>
-    <button id="cookies" onclick="showCookies()">Show the cookies</button>
+        <h1>Cookies</h1>
+        <button id="cookies" onclick="showCookies()">Show the cookies</button>
     </div>
     <script>
         function setCookies() { 
@@ -32,17 +31,44 @@
             // Add 10 days to the current date
             now.setUTCDate(now.getUTCDate() + 10);
 
-            const tenDaysLater = now.toISOString();
-            document.cookie = firstname + "; expires=" + expires.toUTCString();
-            document.cookie =  email + "; expires=" + expires.toUTCString();
+            const expires = now.toUTCString(); // Corrected variable name
+            document.cookie = "firstname=" + firstname + "; expires=" + expires; // Set the cookie
+            document.cookie = "email=" + email + "; expires=" + expires; // Set the cookie
         }
 
-function showCookies() {
-    const p = document.createElement("p");
-    p.innerHTML = "Cookies: " + document.cookie ;
+        function showCookies() {
+            const cookies = document.cookie.split(';'); // Get all cookies
+            const cookieData = {};
 
-    document.body.appendChild(p);
-}
+            cookies.forEach(cookie => {
+                const parts = cookie.split('=');
+                const name = parts[0].trim();
+                const value = parts[1];
+                cookieData[name] = value;
+            });
+
+            const p = document.createElement("p");
+            p.innerHTML = "Email: " + cookieData.email + " - Firstname: " + cookieData.firstname ;
+           
+            document.body.appendChild(p);
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        
+        }
     </script>
 </body>
 </html>
