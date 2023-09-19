@@ -22,58 +22,57 @@
     </div>
 
     <script>
-        function setCookiesAndShowWelcomeMessage() {
-            const firstname = document.getElementById("firstname").value;
-            const email = document.getElementById("email").value;
+         function setCookiesAndShowWelcomeMessage() {
+                const firstname = document.getElementById("firstName").value;
+                const email = document.getElementById("email").value;
 
-            Cookies.set("firstname", firstname, { expires: 10 });
-            Cookies.set("email", email, { expires: 10 });
+                Cookies.set("firstname", firstname, { expires: 10 });
+                Cookies.set("email", email, { expires: 10 });
 
-            showWelcomeMessageOrForm();
-        }
+                showWelcomeMessageOrForm();
+            }
 
+            function hideForm() {
+                document.getElementById("form").hidden = true;
+            }
 
-        function hideForm() {
-            document.getElementById("form").hidden = true;
-        }
+            function deleteCookiesAndShowForm() {
+                Cookies.remove("firstname");
+                Cookies.remove("email");
 
-        function deleteCookiesAndShowForm() {
-            Cookies.remove("firstname");
-            Cookies.remove("email");
-            
-            showForm();
-        }
+                showForm();
+            }
 
-        function showForm() {
-            const message = document.getElementById("message");
-            if (message)
-                message.remove();
-            document.getElementById("form").hidden = false;
-        }
+            function showForm() {
+                const message = document.getElementById("message");
+                if (message)
+                    message.remove();
+                document.getElementById("form").hidden = false;
+            }
 
-        function showWelcomeMessageOrForm() {
+            function showWelcomeMessageOrForm() {
                 const firstname = Cookies.get("firstname");
                 const email = Cookies.get("email");
                 if (firstname && email) {
-                const header = document.createElement("h1");
-                const link = document.createElement("a");
+                    const header = document.createElement("h1");
+                    const link = document.createElement("a");
 
-                header.textContent = "Welcome " + firstname;
-                header.setAttribute("id", "message");
+                    header.textContent = "Welcome " + firstname;
+                    header.setAttribute("id", "message");
 
-                link.textContent = "(logout)";
-                link.style.fontWeight = "normal";
-                link.style.fontStyle = "italic";
-                link.style.marginLeft = "10px";
-                link.addEventListener("click", deleteCookiesAndShowForm);
+                    link.textContent = "(logout)";
+                    link.style.fontWeight = "normal";
+                    link.style.fontStyle = "italic";
+                    link.style.marginLeft = "10px";
+                    link.addEventListener("click", deleteCookiesAndShowForm);
 
-                header.append(link);
-                document.body.append(header); // Append the header to the body
-            } else {
-                showForm();
+                    header.append(link);
+                    document.body.append(header); // Append the header to the body
+                } else {
+                    showForm();
+                }
             }
-        }
-
+        
 
     </script>
 </body>
