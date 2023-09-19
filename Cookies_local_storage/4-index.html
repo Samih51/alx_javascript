@@ -16,64 +16,64 @@
 <body>
     <div id="form">
         <h2>Login to the website</h2>
+        <!-- Correct the ID to "firstName" with a capital "F" -->
         <textarea id="firstName" cols="10" rows="1" placeholder="Firstname"></textarea>
         <textarea id="email" cols="10" rows="1" placeholder="Email"></textarea>
         <button id="log-in" onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
     </div>
 
     <script>
-         function setCookiesAndShowWelcomeMessage() {
-                const firstname = document.getElementById("firstName").value;
-                const email = document.getElementById("email").value;
+        function setCookiesAndShowWelcomeMessage() {
+            // Use the correct ID "firstName" with a capital "F"
+            const firstname = document.getElementById("firstName").value;
+            const email = document.getElementById("email").value;
 
-                Cookies.set("firstname", firstname, { expires: 10 });
-                Cookies.set("email", email, { expires: 10 });
+            Cookies.set("firstname", firstname, { expires: 10 });
+            Cookies.set("email", email, { expires: 10 });
 
-                showWelcomeMessageOrForm();
-            }
+            showWelcomeMessageOrForm();
+        }
 
-            function hideForm() {
-                document.getElementById("form").hidden = true;
-            }
+        function hideForm() {
+            document.getElementById("form").hidden = true;
+        }
 
-            function deleteCookiesAndShowForm() {
-                Cookies.remove("firstname");
-                Cookies.remove("email");
+        function deleteCookiesAndShowForm() {
+            Cookies.remove("firstname");
+            Cookies.remove("email");
 
+            showForm();
+        }
+
+        function showForm() {
+            const message = document.getElementById("message");
+            if (message)
+                message.remove();
+            document.getElementById("form").hidden = false;
+        }
+
+        function showWelcomeMessageOrForm() {
+            const firstname = Cookies.get("firstname");
+            const email = Cookies.get("email");
+            if (firstname && email) {
+                const header = document.createElement("h1");
+                const link = document.createElement("a");
+
+                header.textContent = "Welcome " + firstname;
+                header.setAttribute("id", "message");
+
+                link.textContent = "(logout)";
+                link.style.fontWeight = "normal";
+                link.style.fontStyle = "italic";
+                link.style.marginLeft = "10px";
+                link.addEventListener("click", deleteCookiesAndShowForm);
+
+                header.append(link);
+                document.body.append(header); // Append the header to the body
+            } else {
                 showForm();
             }
-
-            function showForm() {
-                const message = document.getElementById("message");
-                if (message)
-                    message.remove();
-                document.getElementById("form").hidden = false;
-            }
-
-            function showWelcomeMessageOrForm() {
-                const firstname = Cookies.get("firstname");
-                const email = Cookies.get("email");
-                if (firstname && email) {
-                    const header = document.createElement("h1");
-                    const link = document.createElement("a");
-
-                    header.textContent = "Welcome " + firstname;
-                    header.setAttribute("id", "message");
-
-                    link.textContent = "(logout)";
-                    link.style.fontWeight = "normal";
-                    link.style.fontStyle = "italic";
-                    link.style.marginLeft = "10px";
-                    link.addEventListener("click", deleteCookiesAndShowForm);
-
-                    header.append(link);
-                    document.body.append(header); // Append the header to the body
-                } else {
-                    showForm();
-                }
-            }
-        
-
+        }
     </script>
 </body>
 </html>
