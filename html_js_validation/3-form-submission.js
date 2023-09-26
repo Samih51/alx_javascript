@@ -16,10 +16,12 @@ function handleFormSubmit(event) {
     } else {
         message.textContent = "Form submitted successfully!";
         message.id = "message";
-        form.append(message);
         setTimeout(function () {
-            form.removeChild(message);
+            event.target.submit();
         }, 5000);
+        form.append(message);
+        event.preventDefault();
+
     
     }
 }
