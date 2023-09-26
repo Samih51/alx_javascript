@@ -1,0 +1,15 @@
+function validateEmail(event){
+    var email = document.getElementById("email").value;
+    let error = document.getElementById("error");
+    const isEmailValid = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+    if (!(isEmailValid(email))){
+        error.textContent = "Please enter a valid email address.";
+        event.preventDefault();
+    }
+    else{
+        error.textContent = "";
+    }
+}
